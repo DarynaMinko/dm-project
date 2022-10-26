@@ -8,39 +8,40 @@ export default function People() {
   const fetchData = async () => {
     Axios.get("https://swapi.dev/api/people/").then((res) => {
       setInfo(res.data.results);
-      console.log(res.data.results[0].films);
     });
-    //.catch((err) => console.log("error"));
   };
   useEffect(() => {
     fetchData();
   }, []);
 
   return (
-    <div>
-      <a href="/">Back</a>
-
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-around",
+        margin: "10px 30 px",
+        gap: 10,
+      }}
+    >
+      <div>
+        <p>
+          <a href="/">Back</a>
+        </p>
+      </div>
       <table>
         <tbody>
-          <tr
-            style={{
-              backgroundColor: "#D6EEEE",
-              textAlign: "left",
-              BorderBottom: "1px solid #DDD",
-              border: "1px solid black",
-              fontFamily: "Helvetica"
-            }}
-          >
+          <tr>
             <th>Name</th>
             <th>Height</th>
             <th>Mass</th>
             <th>Hair Color</th>
             <th>Skin Color</th>
             <th>Eye Color</th>
-            <th>Birth</th>
+            <th>Birth year</th>
             <th>Gender</th>
-            <th>Films</th>
             <th>Homeworld</th>
+            <th>Films</th>
             <th>Species</th>
             <th>Vehicles</th>
             <th>Starships</th>
@@ -48,105 +49,41 @@ export default function People() {
             <th>Edited</th>
             <th>url</th>
           </tr>
-
-          {info &&
-            info
-              .map((user) => <div key={v4()}> {user.name}</div>)
-              .map((element, index) => (
-                <tr>
-                  <td>{element}</td>
-                  <td style={{ border: "1px solid gray" }}>
-                    {info &&
-                      info.map((user) => <div key={v4()}> {user.height}</div>)[
-                        index
-                      ]}
-                  </td>
-                  <td style={{ border: "1px solid gray" }}>
-                    {info &&
-                      info.map((user) => <div key={v4()}> {user.mass}</div>)[
-                        index
-                      ]}
-                  </td>
-                  <td style={{ border: "1px solid gray" }}>
-                    {info &&
-                      info.map((user) => (
-                        <div key={v4()}> {user.hair_color}</div>
-                      ))[index]}
-                  </td>
-                  <td style={{ border: "1px solid gray" }}>
-                    {info &&
-                      info.map((user) => (
-                        <div key={v4()}>{user.skin_color}</div>
-                      ))[index]}
-                  </td>
-                  <td style={{ border: "1px solid gray" }}>
-                    {info &&
-                      info.map((user) => (
-                        <div key={v4()}> {user.eye_color}</div>
-                      ))[index]}
-                  </td>
-                  <td style={{ border: "1px solid gray" }}>
-                    {info &&
-                      info.map((user) => (
-                        <div key={v4()}>{user.birth_year}</div>
-                      ))[index]}
-                  </td>
-                  <td style={{ border: "1px solid gray" }}>
-                    {info &&
-                      info.map((user) => <div key={v4()}>{user.gender}</div>)[
-                        index
-                      ]}
-                  </td>
-                  <td style={{ border: "1px solid gray" }}>
-                    {info &&
-                      info.map((user) => (
-                        <div key={v4()}>{user.homeworld}</div>
-                      ))[index]}
-                  </td>
-                  <td style={{ border: "1px solid gray" }}>
-                    {info &&
-                      info.map((user) => <div key={v4()}>{user.films}</div>)[
-                        index
-                      ]}
-                  </td>
-                  <td style={{ border: "1px solid gray" }}>
-                    {info &&
-                      info.map((user) => <div key={v4()}>{user.species}</div>)[
-                        index
-                      ]}
-                  </td>
-                  <td style={{ border: "1px solid gray" }}>
-                    {info &&
-                      info.map((user) => <div key={v4()}>{user.vehicles}</div>)[
-                        index
-                      ]}
-                  </td>
-                  <td style={{ border: "1px solid gray" }}>
-                    {info &&
-                      info.map((user) => (
-                        <div key={v4()}>{user.starships}</div>
-                      ))[index]}
-                  </td>
-                  <td style={{ border: "1px solid gray" }}>
-                    {info &&
-                      info.map((user) => <div key={v4()}>{user.created}</div>)[
-                        index
-                      ]}
-                  </td>
-                  <td style={{ border: "1px solid gray" }}>
-                    {info &&
-                      info.map((user) => <div key={v4()}>{user.edited}</div>)[
-                        index
-                      ]}
-                  </td>
-                  <td style={{ border: "1px solid gray" }}>
-                    {info &&
-                      info.map((user) => <div key={v4()}>{user.url}</div>)[
-                        index
-                      ]}
-                  </td>
-                </tr>
-              ))}
+          {info.map((user, index) => (
+            <tr key={v4()} style={{ background: "pink", width: "100" }}>
+              <td> {user.name} </td>
+              <td> {user.height} </td>
+              <td> {user.mass} </td>
+              <td> {user.hair_color} </td>
+              <td> {user.skin_color} </td>
+              <td> {user.eye_color} </td>
+              <td> {user.birth_year} </td>
+              <td> {user.gender} </td>
+              <td> {user.homeworld} </td>
+              <td>
+                {" "}
+                {user.films.map((item, index) => (
+                  <option key={v4()}> {item} </option>
+                ))}{" "}
+              </td>
+              <td>
+                {" "}
+                {user.species.map((item, index) => (
+                  <option key={v4()}> {item} </option>
+                ))}{" "}
+              </td>
+              <td> {user.vehicles} </td>
+              <td>
+                {" "}
+                {user.starships.map((item, index) => (
+                  <option key={v4()}> {item} </option>
+                ))}{" "}
+              </td>
+              <td> {user.created} </td>
+              <td> {user.edited} </td>
+              <td> {user.url} </td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </div>

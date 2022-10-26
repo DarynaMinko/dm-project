@@ -9,28 +9,29 @@ export default function Planets() {
       setInfo(res.data.results);
       console.log(res.data.results[0].films);
     });
-    //.catch((err) => console.log("error"));
   };
   useEffect(() => {
     fetchData();
   }, []);
 
   return (
-    <div>
-      <a href="/">Back</a>
-
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-around",
+        margin: "10px 30 px",
+        gap: 10,
+      }}
+    >
+      <div>
+        <p>
+          <a href="/">Back</a>
+        </p>
+      </div>
       <table>
         <tbody>
-          <tr
-            style={{
-              backgroundColor: "#D6EEEE",
-              padding: "8px",
-              textAlign: "left",
-              BorderBottom: "1px solid #DDD",
-              border: "1px solid black",
-              fontFamily: "Helvetica"
-            }}
-          >
+          <tr>
             <th>Name</th>
             <th>Rotation Period</th>
             <th>Orbital Period</th>
@@ -38,94 +39,35 @@ export default function Planets() {
             <th>Climate</th>
             <th>Gravity</th>
             <th>Terrain</th>
-            <th>Surface_water</th>
+            <th>Surface water</th>
             <th>Population</th>
             <th>Films</th>
             <th>Created</th>
             <th>Edited</th>
             <th>url</th>
           </tr>
-
-          {info &&
-            info
-              .map((planet) => <div key={v4()}>{planet.name}</div>)
-              .map((element, index) => (
-                <tr>
-                  <td>{element}</td>
-                  <td style={{ border: "1px solid gray" }}>
-                    {info &&
-                      info.map((planet) => (
-                        <div key={v4()}>{planet.rotation_period}</div>
-                      ))[index]}
-                  </td>
-                  <td style={{ border: "1px solid gray" }}>
-                    {info &&
-                      info.map((planet) => (
-                        <div key={v4()}>{planet.orbital_period}</div>
-                      ))[index]}
-                  </td>
-                  <td style={{ border: "1px solid gray" }}>
-                    {info &&
-                      info.map((planet) => (
-                        <div key={v4()}>{planet.diameter}</div>
-                      ))[index]}
-                  </td>
-                  <td style={{ border: "1px solid gray" }}>
-                    {info &&
-                      info.map((planet) => (
-                        <div key={v4()}>{planet.climate}</div>
-                      ))[index]}
-                  </td>
-                  <td style={{ border: "1px solid gray" }}>
-                    {info &&
-                      info.map((planet) => (
-                        <div key={v4()}>{planet.gravity}</div>
-                      ))[index]}
-                  </td>
-                  <td style={{ border: "1px solid gray" }}>
-                    {info &&
-                      info.map((planet) => (
-                        <div key={v4()}>{planet.Terrain}</div>
-                      ))[index]}
-                  </td>
-                  <td style={{ border: "1px solid gray" }}>
-                    {info &&
-                      info.map((planet) => (
-                        <div key={v4()}>{planet.surface_water}</div>
-                      ))[index]}
-                  </td>
-                  <td style={{ border: "1px solid gray" }}>
-                    {info &&
-                      info.map((planet) => (
-                        <div key={v4()}>{planet.population}</div>
-                      ))[index]}
-                  </td>
-                  <td style={{ border: "1px solid gray" }}>
-                    {info &&
-                      info.map((planet) => (
-                        <div key={v4()}>{planet.residents}</div>
-                      ))[index]}
-                  </td>
-                  <td style={{ border: "1px solid gray" }}>
-                    {info &&
-                      info.map((planet) => (
-                        <div key={v4()}>{planet.films}</div>
-                      ))[index]}
-                  </td>
-                  <td style={{ border: "1px solid gray" }}>
-                    {info &&
-                      info.map((planet) => (
-                        <div key={v4()}>{planet.created}</div>
-                      ))[index]}
-                  </td>
-                  <td style={{ border: "1px solid gray" }}>
-                    {info &&
-                      info.map((planet) => (
-                        <div key={v4()}>{planet.edited}</div>
-                      ))[index]}
-                  </td>
-                </tr>
-              ))}
+          {info.map((planet, index) => (
+            <tr key={v4()} style={{ background: "gray", width: "100" }}>
+              <td> {planet.name} </td>
+              <td> {planet.rotation_period} </td>
+              <td> {planet.orbital_period} </td>
+              <td> {planet.diameter} </td>
+              <td> {planet.climate} </td>
+              <td> {planet.gravity} </td>
+              <td> {planet.terrain} </td>
+              <td> {planet.surface_water} </td>
+              <td> {planet.population} </td>
+              <td>
+                {" "}
+                {planet.films.map((item, index) => (
+                  <option key={v4()}> {item} </option>
+                ))}
+              </td>
+              <td> {planet.created} </td>
+              <td> {planet.edited} </td>
+              <td> {planet.url} </td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </div>
