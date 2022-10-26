@@ -11,8 +11,9 @@ export const HomePage = () => {
       .then((res) => {
         setInfo(res.data);
       })
-      .catch((err) => console.lof("error"));
+      .catch((err) => console.log("error"));
   };
+
   useEffect(() => {
     fetchData();
   }, []);
@@ -24,7 +25,6 @@ export const HomePage = () => {
           <button onClick={fetchData} className="People-btn">
             People
           </button>
-          <h2> {info.name} </h2>
         </div>
       </Link>
 
@@ -33,7 +33,6 @@ export const HomePage = () => {
           <button onClick={fetchData} className="People-btn">
             Planets
           </button>
-          <h2> {info.name} </h2>
         </div>
       </Link>
 
@@ -42,7 +41,6 @@ export const HomePage = () => {
           <button onClick={fetchData} className="People-btn">
             Films
           </button>
-          <h2> {info.name} </h2>
         </div>
       </Link>
     </div>

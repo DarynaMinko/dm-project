@@ -9,27 +9,30 @@ export default function Films() {
       setInfo(res.data.results);
       console.log(res.data.results[0].films);
     });
-    //.catch((err) => console.log("error"));
   };
   useEffect(() => {
     fetchData();
   }, []);
 
   return (
-    <div>
-      <a href="/">Back</a>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-around",
+        margin: "10px 30 px",
+        gap: 10,
+        columnWidth: "100%",
+      }}
+    >
+      <div>
+        <p>
+          <a href="/">Back</a>
+        </p>
+      </div>
       <table>
         <tbody>
-          <tr
-            style={{
-              backgroundColor: "#D6EEEE",
-              padding: "8px",
-              textAlign: "left",
-              BorderBottom: "1px solid #DDD",
-              border: "1px solid black",
-              fontFamily: "Helvetica"
-            }}
-          >
+          <tr>
             <th>Title</th>
             <th>Episode id</th>
             <th>Opening crawl</th>
@@ -37,7 +40,6 @@ export default function Films() {
             <th>Producer</th>
             <th>Release date</th>
             <th>Characters</th>
-            <th>Planets</th>
             <th>Starships</th>
             <th>Vehicles</th>
             <th>Species</th>
@@ -46,90 +48,43 @@ export default function Films() {
             <th>url</th>
           </tr>
 
-          {info &&
-            info
-              .map((films) => (
-                <div styles={{ colWidth: "relative_length" }} key={v4()}>
-                  {films.title}
-                </div>
-              ))
-              .map((element, index) => (
-                <tr>
-                  <td>{element}</td>
-                  <td style={{ border: "1px solid gray" }}>
-                    {info &&
-                      info.map((films) => (
-                        <div key={v4()}>{films.episode_id}</div>
-                      ))[index]}
-                  </td>
-                  <td style={{ border: "1px solid gray" }}>
-                    {info &&
-                      info.map((films) => (
-                        <div key={v4()}>{films.opening_crawl}</div>
-                      ))[index]}
-                  </td>
-                  <td style={{ border: "1px solid gray" }}>
-                    {info &&
-                      info.map((films) => (
-                        <div key={v4()}>{films.director}</div>
-                      ))[index]}
-                  </td>
-                  <td style={{ border: "1px solid gray" }}>
-                    {info &&
-                      info.map((films) => (
-                        <div key={v4()}>{films.producer}</div>
-                      ))[index]}
-                  </td>
-                  <td style={{ border: "1px solid gray" }}>
-                    {info &&
-                      info.map((films) => (
-                        <div key={v4()}>{films.release_date}</div>
-                      ))[index]}
-                  </td>
-                  <td style={{ border: "1px solid gray" }}>
-                    {info &&
-                      info.map((films) => (
-                        <div key={v4()}>{films.characters}</div>
-                      ))[index]}
-                  </td>
-                  <td style={{ border: "1px solid gray" }}>
-                    {info &&
-                      info.map((films) => (
-                        <div key={v4()}>{films.starships}</div>
-                      ))[index]}
-                  </td>
-                  <td style={{ border: "1px solid gray" }}>
-                    {info &&
-                      info.map((films) => (
-                        <div key={v4()}>{films.vehicles}</div>
-                      ))[index]}
-                  </td>
-                  <td style={{ border: "1px solid gray" }}>
-                    {info &&
-                      info.map((films) => (
-                        <div key={v4()}>{films.species}</div>
-                      ))[index]}
-                  </td>
-                  <td style={{ border: "1px solid gray" }}>
-                    {info &&
-                      info.map((films) => (
-                        <div key={v4()}>{films.created}</div>
-                      ))[index]}
-                  </td>
-                  <td style={{ border: "1px solid gray" }}>
-                    {info &&
-                      info.map((films) => <div key={v4()}>{films.edited}</div>)[
-                        index
-                      ]}
-                  </td>
-                  <td style={{ border: "1px solid gray" }}>
-                    {info &&
-                      info.map((films) => <div key={v4()}>{films.url}</div>)[
-                        index
-                      ]}
-                  </td>
-                </tr>
-              ))}
+          {info.map((film, index) => (
+            <tr key={v4()} style={{ background: "green" }}>
+              <td> {film.title} </td>
+              <td> {film.episode_id} </td>
+              <td> {film.opening_crawl} </td>
+              <td> {film.director} </td>
+              <td> {film.producer} </td>
+              <td> {film.release_date} </td>
+              <td>
+                {" "}
+                {film.characters.map((item, index) => (
+                  <option key={v4()}> {item} </option>
+                ))}
+              </td>
+              <td>
+                {" "}
+                {film.starships.map((item, index) => (
+                  <option key={v4()}> {item} </option>
+                ))}
+              </td>
+              <td>
+                {" "}
+                {film.vehicles.map((item, index) => (
+                  <option key={v4()}> {item} </option>
+                ))}
+              </td>
+              <td>
+                {" "}
+                {film.species.map((item, index) => (
+                  <option key={v4()}> {item} </option>
+                ))}
+              </td>
+              <td> {film.created} </td>
+              <td> {film.edited} </td>
+              <td> {film.url} </td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </div>
