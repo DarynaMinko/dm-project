@@ -4,10 +4,13 @@ import { v4 } from "uuid";
 
 export default function People() {
   const [info, setInfo] = useState([]);
-
+  const [key, setKey] = useState([]);
+   
   const fetchData = async () => {
     Axios.get("https://swapi.dev/api/people/").then((res) => {
       setInfo(res.data.results);
+      setKey(Object.keys(res.data.results[0]));
+      //console.log(res.data.results);
     });
   };
   useEffect(() => {
@@ -31,23 +34,10 @@ export default function People() {
       </div>
       <table>
         <tbody>
-          <tr>
-            <th>Name</th>
-            <th>Height</th>
-            <th>Mass</th>
-            <th>Hair Color</th>
-            <th>Skin Color</th>
-            <th>Eye Color</th>
-            <th>Birth year</th>
-            <th>Gender</th>
-            <th>Homeworld</th>
-            <th>Films</th>
-            <th>Species</th>
-            <th>Vehicles</th>
-            <th>Starships</th>
-            <th>Created</th>
-            <th>Edited</th>
-            <th>url</th>
+        <tr style={{ background: "lightBlue", width: "100" }}>
+          {key.map((item, index) => (
+            <td key={v4()}>{item.toUpperCase()}</td>
+          ))}
           </tr>
           {info.map((user, index) => (
             <tr key={v4()} style={{ background: "pink", width: "100" }}>

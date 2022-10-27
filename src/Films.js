@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from "react";
 import Axios from "axios";
 import { v4 } from "uuid";
+
 export default function Films() {
   const [info, setInfo] = useState([]);
+  const [key, setKey] = useState([]);
 
   const fetchData = async () => {
     Axios.get("https://swapi.dev/api/films/").then((res) => {
       setInfo(res.data.results);
-      console.log(res.data.results[0].films);
+      setKey(Object.keys(res.data.results[0]));
+      //console.log(res.data.results[0].films);
     });
   };
   useEffect(() => {
@@ -32,20 +35,10 @@ export default function Films() {
       </div>
       <table>
         <tbody>
-          <tr>
-            <th>Title</th>
-            <th>Episode id</th>
-            <th>Opening crawl</th>
-            <th>Director</th>
-            <th>Producer</th>
-            <th>Release date</th>
-            <th>Characters</th>
-            <th>Starships</th>
-            <th>Vehicles</th>
-            <th>Species</th>
-            <th>Created</th>
-            <th>Edited</th>
-            <th>url</th>
+          <tr style={{ background: "pink", width: "100" }}>
+            {key.map((item, index) => (
+             <td key={v4()}>{item.toUpperCase()}</td>
+            ))}
           </tr>
 
           {info.map((film, index) => (
@@ -59,6 +52,12 @@ export default function Films() {
               <td>
                 {" "}
                 {film.characters.map((item, index) => (
+                  <option key={v4()}> {item} </option>
+                ))}
+              </td>
+              <td>
+                {" "}
+                {film.planets.map((item, index) => (
                   <option key={v4()}> {item} </option>
                 ))}
               </td>
