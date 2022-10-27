@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from "react";
 import Axios from "axios";
 import { v4 } from "uuid";
+
 export default function Planets() {
   const [info, setInfo] = useState([]);
+  const [key, setKey] = useState([]);
 
   const fetchData = async () => {
     Axios.get("https://swapi.dev/api/planets/").then((res) => {
       setInfo(res.data.results);
-      console.log(res.data.results[0].films);
+      setKey(Object.keys(res.data.results[0]));
+      //console.log(res.data.results[0].films);
     });
   };
   useEffect(() => {
@@ -31,20 +34,10 @@ export default function Planets() {
       </div>
       <table>
         <tbody>
-          <tr>
-            <th>Name</th>
-            <th>Rotation Period</th>
-            <th>Orbital Period</th>
-            <th>Diameter</th>
-            <th>Climate</th>
-            <th>Gravity</th>
-            <th>Terrain</th>
-            <th>Surface water</th>
-            <th>Population</th>
-            <th>Films</th>
-            <th>Created</th>
-            <th>Edited</th>
-            <th>url</th>
+          <tr style={{ background: "pink", width: "100" }}>
+            {key.map((item, index) => (
+             <td key={v4()}>{item.toUpperCase()}</td>
+            ))}
           </tr>
           {info.map((planet, index) => (
             <tr key={v4()} style={{ background: "gray", width: "100" }}>
